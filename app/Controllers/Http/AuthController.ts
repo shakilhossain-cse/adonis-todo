@@ -51,4 +51,17 @@ export default class AuthController {
       })
     }
   }
+
+  /**
+   * profile method
+   */
+  public async profile({ response, auth }) {
+    try {
+      const user = await User.query().where('id', auth.user.id).preload('todos').firstOrFail()
+      return response.send(user)
+    } catch (error) {
+      console.error(error)
+      return response.status(500).send({ message: 'Something went wrong' })
+    }
+  }
 }

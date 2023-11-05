@@ -29,7 +29,7 @@ export default class User extends BaseModel {
   public updatedAt: DateTime
 
   @hasMany(() => Todo, { localKey: 'id', foreignKey: 'user_id' })
-  public posts: HasMany<typeof Todo>
+  public todos: HasMany<typeof Todo>
 
   @beforeSave()
   public static async hashPassword(user: User) {
