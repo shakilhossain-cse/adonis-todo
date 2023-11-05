@@ -31,6 +31,7 @@ Route.group(() => {
     Route.post('/todo', 'TodosController.store')
     Route.delete('/todo/:id', 'TodosController.destroy')
     Route.get('/profile', 'AuthController.profile')
+    Route.post('/comment', 'CommentsController.store')
   }).middleware('auth')
 
   Route.post('/register', 'AuthController.register')

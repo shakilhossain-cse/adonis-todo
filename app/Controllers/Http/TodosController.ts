@@ -9,7 +9,7 @@ export default class TodosController {
    * @return all todo
    */
   public async index() {
-    const todos = await Todo.query().preload('author').paginate(1, 2)
+    const todos = await Todo.query().preload('author').preload('comments').paginate(1, 20)
     return todos
   }
 
@@ -30,7 +30,7 @@ export default class TodosController {
       const todo = new Todo()
       todo.title = payload.title
       todo.is_completed = payload.is_completed
-      todo.user_id = auth.user?.id ?? 1
+      todo.user_id = auth.use('api').user?.id ?? 1
 
       await todo.save()
 
